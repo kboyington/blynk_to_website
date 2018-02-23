@@ -7,11 +7,15 @@ from pytz import timezone
 sub_message_1 = ''
 sub_message_2 = ''
 
+#read in API key
+with open('/Users/kboyington/PycharmProjects/meadows_webpage/apikey.txt', 'r') as key:
+    api_key = key.readline()
+
 #make sure hardware is connected
-hardware_connected = requests.get('http://45.55.96.146/{}/isHardwareConnected'.format('XXX'))
+hardware_connected = requests.get('http://45.55.96.146/{}/isHardwareConnected'.format(api_key))
 
 # now get the status of the button
-button_state = requests.get('http://45.55.96.146/XXX/get/V2')
+button_state = requests.get('http://45.55.96.146/{}/get/V2'.format(api_key))
 button_state = int((button_state.json()[0]))
 print(hardware_connected.text)
 
